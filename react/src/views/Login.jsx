@@ -1,6 +1,6 @@
 import { LockClosedIcon } from '@heroicons/react/20/solid'
 
-export default function App() {
+export default function Login() {
   return (
     <>
       <div className="flex min-h-full items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
