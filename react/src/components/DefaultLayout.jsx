@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, UserIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Navigate, Outlet } from "react-router-dom";
 import { useStateContext } from '../context/ContextProvider';
 
 // const user = {
@@ -28,23 +28,19 @@ function classNames(...classes) {
 }
 
 export default function DefaultLayout() {
-    const logout = (e) => {
-        e.preventDefault();
-        console.log("Logout");
-    }
+  const { currentUser, userToken} = useStateContext();
 
-    const { currentUser, userToken} = useStateContext();
+  const logout = (e) => {
+    e.preventDefault();
+  }
 
+
+  if (!userToken) {
+    return <Navigate to="login"/>
+  }
+  
     return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-gray-100">
-        <body class="h-full">
-        ```
-      */}
       <div className="min-h-full">
         <Disclosure as="nav" className="bg-gray-800">
           {({ open }) => (
