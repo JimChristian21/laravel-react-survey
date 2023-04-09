@@ -11,7 +11,7 @@ const StateContext = createContext({
 const tmpSurveys = [
   {
         "id": 1,
-        "image_url": "https:\/\/api.yoursurveys.xyz\/images\/vJutXzn02CDwdOyh.png",
+        "image_url": "https:\/\/i.ibb.co\/Vpcnvb3\/unnamed.jpg",
         "title": "TheCodeholic YouTube channel",
         "slug": "thecodeholic-youtube-channel",
         "status": true,
@@ -152,7 +152,7 @@ const tmpSurveys = [
   },
   {
         "id": 2,
-        "image_url": "https:\/\/api.yoursurveys.xyz\/images\/gjIHElz4aKrL0nT0.png",
+        "image_url": "https:\/\/i.ibb.co\/x2QcFMy\/9d0a6780-394a-11eb-9fd1-6296a684b124.jpg",
         "title": "React",
         "slug": "react",
         "status": true,
@@ -164,7 +164,7 @@ const tmpSurveys = [
   },
   {
         "id": 3,
-        "image_url": "https:\/\/api.yoursurveys.xyz\/images\/WPfzo0g66huUYYwR.png",
+        "image_url": "https:\/\/i.ibb.co\/n8tTFb1\/download.png",
         "title": "Laravel 9",
         "slug": "laravel-9",
         "status": true,
