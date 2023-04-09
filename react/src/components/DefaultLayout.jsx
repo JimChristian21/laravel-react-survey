@@ -34,7 +34,6 @@ export default function DefaultLayout() {
     e.preventDefault();
   }
 
-
   if (!userToken) {
     return <Navigate to="login"/>
   }
