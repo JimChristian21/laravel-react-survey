@@ -34,7 +34,7 @@ class StoreSurveyRequest extends FormRequest
             'user_id' => 'exists:users,id',
             'status' => 'required|boolean',
             'description' => 'nullable|string',
-            'expire_date' => 'nullabe|date|after:today',
+            'expire_date' => 'nullable|date|after:today',
             'questions' => 'array'
         ];
     }
