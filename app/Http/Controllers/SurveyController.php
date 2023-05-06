@@ -148,7 +148,7 @@ class SurveyController extends Controller
     private function saveImage($image) 
     {
 
-         if (preg_match('/^data:image\/(\w+;base64,/', $image, $type)) {
+         if (preg_match('/^data:image\/(\w+);base64,/', $image, $type)) {
 
             $image = substr($image, strpos($image, ',') + 1 );
 

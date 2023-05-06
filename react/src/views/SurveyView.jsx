@@ -1,10 +1,15 @@
-import { useState } from 'react';
-import PageComponent from '../components/PageComponent'
-import { PhotoIcon } from '@heroicons/react/24/outline';
-import TButton from '../components/core/TButton';
-import axiosClient from '../axios.js';
+import { useState } from "react";
+import PageComponent from "../components/PageComponent"
+import { PhotoIcon } from "@heroicons/react/24/outline";
+import TButton from "../components/core/TButton";
+import axiosClient from "../axios.js";
+import { useNavigate } from "react-router-dom";
+import SurveyQuestions from "../components/SurveyQuestions";
 
 export default function SurveyView() {
+
+  const navigate = useNavigate();
+
   const [survey, setSurvey] = useState({
     title: "",
     slug: "",
@@ -16,31 +21,77 @@ export default function SurveyView() {
     questions: []
   });
 
+  const [error, setError] = useState('');
+
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log('test');
-    axiosClient.post('/survey', {
-      title: 'Lorem Ipsum',
-      description: 'Test',
-      expire_date: '2023-05-02',
-      status: true,
-      questions: []
+
+    console.log(survey);
+    
+    const payload = {
+      ...survey
+    };
+
+    if (payload.image) {
+
+      payload.image = payload.image_url;
+    }
+
+    delete payload.image_url;
+
+    axiosClient.post('/survey', payload)
+    .then((res) => {
+
+      navigate('/surveys');
+    }).catch((error) => {
+
+      if (error && error.response) {
+
+        setError(error.response.data.message);
+      }
     });
+   
   }
 
-  const onImageChoose = () => {
+  const onImageChoose = (ev) => {
 
+    const file = ev.target.files[0];
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      setSurvey({
+        ...survey,
+        image: file,
+        image_url: reader.result
+      });
+
+      ev.target.value = "";
+    }
+
+    reader.readAsDataURL(file);
   }
 
   const addQuestion = () => {
 
   }
 
+  const onSurveyUpdate = (survey) => {
+
+    setSurvey({...survey});
+  }
+
   return (
     <PageComponent title="Create new Survey">
 			<form action="#" method="POST" onSubmit={onSubmit}>
         <div className="shadow sm:overflow-hidden sm:rounded-md">
+
           <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
+
+            { error && (
+              <div className="bg-red-500 text0white py-2 px-3 rounded-lg">
+                {error}
+              </div>
+            )}
             {/* Image */}
             <div>
               <label className="block text-sm font-medium text-gray-700">
@@ -153,6 +204,8 @@ export default function SurveyView() {
               </div>
             </div>
             {/* Active */}
+
+            <SurveyQuestions survey={survey} onSurveyUpdate={onSurveyUpdate}/>
           </div>
           <div className='bg-gray-50 px-4 py-3 text-right sm:px-6'>
             <TButton>
